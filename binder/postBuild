@@ -12,4 +12,21 @@ nbf.write(new_ntbk, "demo.ipynb", version=nbf.NO_CONVERT)
 ###END OF nbformat use to drop the first notebook cell.
 
 
+### add a header and `import SQUARNA` as first code cell in demo nb (somewhat adpated from https://github.com/jupyter/nbformat/issues/176#issuecomment-610214638)
+header_md_text_to_add = """\
+# SQUARNA demo
+Run all the cells using the menu option '`Run`' > '`Run All`'.\n
+Alternatively, to execute code in a single cell, select the cell and press Shift + Enter. This allows you to run the cells sequentially one by one, stepping through the notebook's execution.
 
+-------------
+"""
+
+code_to_add = """\
+import SQUARNA"""
+
+ntbk = nbf.read("demo.ipynb", nbf.NO_CONVERT)
+modified_ntbk = ntbk
+modified_cells_listing = [nbf.v4.new_markdown_cell(header_md_text_to_add), nbf.v4.new_code_cell(code_to_add)]
+modified_ntbk.cells = modified_cells_listing + ntbk.cells
+nbf.write(modified_ntbk, "demo.ipynb", version=nbf.NO_CONVERT)
+###END OF nbformat use to add header and import.
