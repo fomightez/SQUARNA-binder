@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# move SQUARNA.py to be hidden so `import SQUARNA` in demo.ipynb in the root directory, that normally would also have SQUARNA.py, works and uses the pip-installed dependency (done via `binder/requirments.txt`) instead
+mv SQUARNA.py .SQUARNA.py
+
+
+# this must be last line according to 
+# https://repo2docker.readthedocs.io/en/latest/config_files.html#start-run-code-before-the-user-sessions-starts
+exec "$@"
