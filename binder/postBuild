@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+###nbformat use to drop the first few notebook cells, based on https://stackoverflow.com/a/71244733/8508004 to get fourth cell forward.
+# Don't want first cell because first cell currently, which is at https://github.com/febos/SQUARNA/blob/main/demo.ipynb , has install and don't need and some weird empty cell. Plus should have a header so might as well add that and add import back at that time to make separating out content at this stage easier.
+cell_to_start_collecting_at = 4 # number of cell to start the span of cells to collect; first cell gets number 1 in bracket if run so use that numbering
+length_of_cell_block_to_keep = 2000 # length of sequential span of cells to keep
+import nbformat as nbf
+ntbk = nbf.read("demo.ipynb", nbf.NO_CONVERT)
+new_ntbk = ntbk
+new_ntbk.cells = [cell for indx, cell in enumerate(ntbk.cells) if cell_to_start_collecting_at - 2 < indx < (cell_to_start_collecting_at + length_of_cell_block_to_keep - 1)]
+nbf.write(new_ntbk, "demo.ipynb", version=nbf.NO_CONVERT)
+###END OF nbformat use to drop the first notebook cell.
+
+
+
