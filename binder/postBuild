@@ -35,7 +35,7 @@ ntbk = nbf.read("demo.ipynb", nbf.NO_CONVERT)
 modified_ntbk = ntbk
 modified_header_cells_listing = [nbf.v4.new_markdown_cell(header_md_text_to_add), nbf.v4.new_code_cell(code_to_add)]
 footer_cells_listing = [nbf.v4.new_markdown_cell(footer_md_text_to_add)]
-modified_ntbk.cells = modified_header_cells_listing + ntbk.cells + 
+modified_ntbk.cells = modified_header_cells_listing + ntbk.cells + footer_cells_listing 
 nbf.write(modified_ntbk, "demo.ipynb", version=nbf.NO_CONVERT)
 ###END OF nbformat use to add header and import.
 #--- END of Improving Demo Notebook On & off boarding--------------------------#
