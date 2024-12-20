@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#--- Improve Demo Notebook Onboarding------------------------------------------#
+#--- Improve Demo Notebook Onboarding & Offboarding----------------------------#
 ###nbformat use to drop the first few notebook cells, based on https://stackoverflow.com/a/71244733/8508004 to get fourth cell forward.
 # Don't want first cell because first cell currently, which is at https://github.com/febos/SQUARNA/blob/main/demo.ipynb , has install and don't need and some weird empty cell. Plus should have a header so might as well add that and add import back at that time to make separating out content at this stage easier.
 cell_to_start_collecting_at = 4 # number of cell to start the span of cells to collect; first cell gets number 1 in bracket if run so use that numbering
@@ -25,10 +25,17 @@ Alternatively, to execute code in a single cell, select the cell and press Shift
 code_to_add = """\
 import SQUARNA"""
 
+footer_md_text_to_add = """\
+-------------
+
+Enjoy!
+"""
+
 ntbk = nbf.read("demo.ipynb", nbf.NO_CONVERT)
 modified_ntbk = ntbk
-modified_cells_listing = [nbf.v4.new_markdown_cell(header_md_text_to_add), nbf.v4.new_code_cell(code_to_add)]
-modified_ntbk.cells = modified_cells_listing + ntbk.cells
+modified_header_cells_listing = [nbf.v4.new_markdown_cell(header_md_text_to_add), nbf.v4.new_code_cell(code_to_add)]
+footer_cells_listing = [nbf.v4.new_markdown_cell(footer_md_text_to_add)]
+modified_ntbk.cells = modified_header_cells_listing + ntbk.cells + 
 nbf.write(modified_ntbk, "demo.ipynb", version=nbf.NO_CONVERT)
 ###END OF nbformat use to add header and import.
-#--- END of Improving Demo Notebook Onboarding---------------------------------#
+#--- END of Improving Demo Notebook On & off boarding--------------------------#
